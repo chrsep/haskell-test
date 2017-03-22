@@ -2,14 +2,14 @@
 
 doubler :: [Integer]->[Integer]
 doubler [] = []
-doubler (x:xs) 
+doubler (x:xs)
   | length xs `mod` 2 /= 1 = x : doubler xs
   | otherwise = x*2 : doubler xs
 
 sum'em :: [Integer]->Integer
 sum'em x = go (doubler x)
-        where 
-         go (y:ys) = combine y + go ys 
+        where
+         go (y:ys) = combine y + go ys
          go [] = 0
 
 combine :: Integer->Integer
