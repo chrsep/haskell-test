@@ -18,3 +18,7 @@ instance YesNo (Maybe a) where
 
 yesnoif::(YesNo y) => y -> a -> a -> a
 yesnoif yesnoVal yesResult noResult = if yesno yesnoVal then yesResult else noResult
+
+main = do
+  rs <- sequence [getLine, getLine, getLine]
+  print rs
