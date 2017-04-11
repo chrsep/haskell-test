@@ -22,9 +22,10 @@ validate x = (sum'em x `mod` 10) == 0
 
 
 
-{-# Excerscise 2  - WIP#-}
+{- Excercise 2 -}
 
 type Peg = String
 type Move = (Peg, Peg)
 hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
-hanoi amount name1 name2 name3 = [("a", "a")]
+hanoi 0 _ _ _ = []
+hanoi n a b c = hanoi (n-1) a c b ++ [(a, b)] ++ hanoi (n-1) c b a
