@@ -1,7 +1,7 @@
-import System.Environment
-import System.Directory
-import System.IO
-import Data.List
+import           Data.List
+import           System.Directory
+import           System.Environment
+import           System.IO
 
 dispatch::[(String, [String] -> IO ())]
 dispatch = [("add", add)
@@ -27,12 +27,12 @@ view [fileName] = do
 
 remove::[String] -> IO ()
 remove [fileName, numberString] = do
-  handle                 <- openFile fileName ReadMode
+  handle <- openFile fileName ReadMode
   (tempName, tempHandle) <- openTempFile "." "temp"
-  contents               <- hGetContents handle
-  let number              = read numberString
-      todoTasks           = lines contents
-      newTodoItems        = delete (todoTasks !! number) todoTasks
+  contents <- hGetContents handle
+  let number = read numberString
+      todoTasks = lines contents
+      newTodoItems = delete (todoTasks !! number) todoTasks
   hPutStr tempHandle $ unlines newTodoItems
   hClose handle
   hClose tempHandle

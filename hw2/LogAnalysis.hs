@@ -14,6 +14,7 @@ parseMessage string = case words string of
 parse :: String -> [LogMessage]
 parse logs = map parseMessage $ lines logs
 
+--  :baby_bottle: :wink: :cinema:
 insert :: LogMessage -> MessageTree -> MessageTree
 insert (Unknown _) tree = tree
 insert m@(LogMessage _ t1 _ ) (Node l mo@(LogMessage _ t2 _ ) r)
@@ -39,6 +40,5 @@ whatWentWrong' :: [LogMessage] -> [String]
 whatWentWrong' = map (\(LogMessage _ _ s) -> s) . filter severe . inOrder . build
   where
     severe (LogMessage (Error n)  _ _) = n > 50
-    severe (LogMessage Info t _) = t `elem` [120..131]
-    severe (LogMessage Info t _) = t `elem` [1290..1302]
+    severe (LogMessage Info t _)       = t `elem` [120..131]
     severe _                           = False
