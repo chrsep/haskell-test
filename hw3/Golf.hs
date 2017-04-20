@@ -6,7 +6,5 @@ skips l = map (map snd . filterElem) [1..(length l)]
         filterElem n = filter (\x -> fst x `mod` n == 0) l'
 
 localMaxima :: [Integer] -> [Integer]
-localMaxima ( x:y:z:zs )
-  | x < y && z < y = y:localMaxima ( y:z:zs )
-  | otherwise = localMaxima ( y:z:zs )
+localMaxima ( x:y:zs@(z:_) ) = [y | x < y && z < y] ++ localMaxima zs
 localMaxima _ = []
