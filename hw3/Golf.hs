@@ -39,10 +39,8 @@ passed to the upper map function.
 histogram :: [Integer] -> String
 histogram l = unwords (map line [mx,( mx - 1 ) .. 1]) ++ "\n==========\n0123456789\n"
   where
-    cntr n acc x
-      | x == n = acc + 1
-      | otherwise = acc
-    amt = map (\x -> foldl (cntr x) 0 l) [0 .. 9]
-    mx = maximum amt
+    counter n acc x = if x == n then acc + 1 else acc
+    occurrences = map (\x -> foldl (counter x) 0 l) [0 .. 9]
+    mx = maximum occurrences::Integer
     xorstar x y = if y >= x then '*' else ' '
-    line x = "\n" ++ map ( xorstar x ) amt
+    line x = "\n" ++ map ( xorstar x ) occurrences
