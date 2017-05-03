@@ -55,7 +55,7 @@ foldTree'' = foldr insert Leaf
 
 treeDepth :: Tree a -> Integer
 treeDepth (Node x _ _ _) = x
-
+treeDepth Leaf           = 0
 
 -- Ex 3
 
