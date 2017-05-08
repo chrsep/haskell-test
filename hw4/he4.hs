@@ -1,4 +1,5 @@
 module Hw4 where
+import           Data.List ((\\))
 
 -- Ex 1
 fun1 :: [Integer] ->  Integer
@@ -25,7 +26,7 @@ data Tree a = Leaf
             | Node Integer (Tree a) a (Tree a)
   deriving (Show, Eq)
 
-{- First implementation -}
+{- First failed implementation -}
 foldTree :: [a] -> Tree a
 foldTree = foldr insert Leaf
   where
@@ -59,4 +60,24 @@ treeDepth Leaf           = 0
 
 -- Ex 3
 
+xor :: [Bool] -> Bool
+xor = foldr (\x acc -> if x then not acc else acc) True
+
+map' :: (a -> b) -> [a] -> [b]
+map' f = foldr (\x acc -> f x:acc) []
+
+myFoldl :: (a -> b -> a) -> a -> [b] -> a
+myFoldl f base xs = foldr (\y h w -> h (f w y)) id xs base
+
+-- Ex 4
+
+sieveSundaram :: Integer -> [Integer]
+sieveSundaram n =
+  takeWhile (<= 2 * n + 2) .
+  map (\x -> (2 * x) + 1) .
+  (\\) [1 ..] . map (\(i, j) -> i + j + (2 * i * j)) . filter (uncurry (>=)) $
+  cartProd [1 .. n] [1 .. n]
+
+cartProd :: [a] -> [b] -> [(a, b)]
+cartProd xs ys =[(x, y) | x <- xs, y <- ys]
 
