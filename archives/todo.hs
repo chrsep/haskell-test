@@ -46,7 +46,7 @@ bump [fileName, numberString] = do
   contents <- hGetContents handle
   let number = read numberString
       todoTasks = lines contents
-      newTodo = (todoTasks !! number:(delete (todoTasks !! number) todoTasks))
+      newTodo = todoTasks !! number:delete (todoTasks !! number) todoTasks
   hPutStr tempHandle $ unlines newTodo
   hClose handle
   hClose tempHandle

@@ -1,3 +1,5 @@
 a
 .hdevtools.sock
 .cabal
+.idea
+.vscode
